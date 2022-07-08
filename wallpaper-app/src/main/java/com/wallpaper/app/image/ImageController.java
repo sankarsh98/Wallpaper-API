@@ -1,6 +1,5 @@
 package com.wallpaper.app.image;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +22,9 @@ public class ImageController {
 		
 	}
 	
-	@RequestMapping("/images/{key}")
-	public Image getImage(@PathVariable String key) {
-		return imageservice.getImage(key);
+	@RequestMapping("/images/{id}")
+	public Image getImage(@PathVariable int id) {
+		return imageservice.getImage(id);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/images")
@@ -33,14 +32,14 @@ public class ImageController {
 		imageservice.addImage(image);
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT, value="/images/{key}")
-	public void updateImage(@RequestBody Image image, @PathVariable String key) {
-		imageservice.updateImage(image,key);
+	@RequestMapping(method=RequestMethod.PUT, value="/images/{id}")
+	public void updateImage(@RequestBody Image image, @PathVariable int id) {
+		imageservice.updateImage(image,id);
 	}
 	
-	@RequestMapping(method=RequestMethod.DELETE, value="/images/{key}")
-	public void deleteImage( @PathVariable String key) {
-		imageservice.deleteImage(key);
+	@RequestMapping(method=RequestMethod.DELETE, value="/images/{id}")
+	public void deleteImage( @PathVariable int id) {
+		imageservice.deleteImage(id);
 	}
 
 }

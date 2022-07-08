@@ -1,5 +1,10 @@
+package com.wallpaper.app.image;
 
-public interface ImageRepository extends CrudRepository{
-    
+import org.springframework.data.repository.CrudRepository;
+
+public interface ImageRepository extends CrudRepository <Image, Integer>{
+	
+	
 
 }
+
