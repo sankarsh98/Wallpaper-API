@@ -3,57 +3,52 @@ package com.wallpaper.app.image;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ImageService {
 
+	@Autowired
+	private ImageRepository imageRepository;
+		
 	private List<Image> imageList =  new ArrayList<>(Arrays.asList(
-			new Image("god","ganesha.jpg","ganesha_medium.jpg"),
-			new Image("space","milky-way.jpg","milky-way-medium.jpg"),
-			new Image("nature","sunflower.jpg","sunflower-medium.jpg")
+			new Image(1,"god","ganesha.jpg","ganesha_medium.jpg"),
+			new Image(2,"space","milky-way.jpg","milky-way-medium.jpg"),
+			new Image(3,"nature","sunflower.jpg","sunflower-medium.jpg")
 			));
 	
 	public List<Image> getAllImages(){
-		return imageList;
-	}
-	
-	public Image getImage(String key) {
 		
-		Image resultImage=new Image();
+		List<Image> images = new ArrayList<>();
 		
-		for (Image image : imageList){
-			if (image.getKey().equals(key)) {
-				resultImage=image;
-			}
+		for(Image image:imageRepository.findAll()){
+			images.add(image);
 		}
 		
-		return resultImage;
+		return images;
+	}
+	
+	public Image getImage(int id) {
+		
+		return imageRepository.findById(id).get();
 		
 	}
 	
 	
 	public void addImage(Image image) {
-		imageList.add(image);
+		imageRepository.save(image);
 	}
 
-	public void updateImage(Image image, String key) {
-		
-		for(int i = 0; i<imageList.size();i++) {
-			if (imageList.get(i).getKey().equals(key)) {
-				imageList.set(i, image);
-			}
-		}
+	public void updateImage(Image image, int id) {
+		imageRepository.save(image);
 	}
 
-	public void deleteImage(String key) {
+	public void deleteImage(int id) {
 		
-		for(int i = 0; i<imageList.size();i++) {
-			if (imageList.get(i).getKey().equals(key)) {
-				imageList.remove(i);
-			}
-		}
+		imageRepository.deleteById(id);
 		
 	}
 }
