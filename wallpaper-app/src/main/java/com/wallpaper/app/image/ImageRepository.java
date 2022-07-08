@@ -7,3 +7,4 @@ public interface ImageRepository extends CrudRepository <Image, Integer>{
 	
 
 }
+
