@@ -43,6 +43,4 @@ public class ImageController {
 		imageservice.deleteImage(key);
 	}
 
-	
-
 }
